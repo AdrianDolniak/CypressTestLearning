@@ -2,19 +2,20 @@
 
 describe('Login test', () => {
   beforeEach(() => {
-    cy.visit('http://automationpractice.com/index.php', { failOnStatusCode: false })
-    
+    cy.visit('http://automationpractice.com/index.php')
     cy.get('.login').contains('Sign in').click()
-
-    // Should be on a new URL which includes 'my-account'
     cy.url().should('include', 'my-account')
   })
   it('requires email', () => {
+
+    // Gets and asserts
     cy.get('#SubmitLogin').click()
     cy.get('.alert')
       .should('contain.text','An email address required.')
   })
   it('requires password', () => {
+
+    // Gets, types and asserts
     cy.get('#email')
     .type('aaa@ob.pl')
     cy.get('#SubmitLogin').click()
@@ -24,7 +25,7 @@ describe('Login test', () => {
   it('requires valid username and password', () => {
     
     // Gets, types and asserts
-    cy.log('**enter the right credentials**')
+    cy.log('**enter wrong password**')
     cy.get('#email')
       .type('aaa@ob.pl')
       .should('have.value', 'aaa@ob.pl')
