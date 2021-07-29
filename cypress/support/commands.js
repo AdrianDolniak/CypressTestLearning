@@ -10,7 +10,16 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+//
+// Login command to automationpractice.com page
+Cypress.Commands.add('login_automationpractice', (email, password) => { 
+    cy.visit('http://automationpractice.com/index.php')
+    cy.get('.login').contains('Sign in').click()
+    cy.url().should('include', 'my-account')
+    cy.get('#email').type(email)
+    cy.get('#passwd').type(password)
+    cy.get('#SubmitLogin').click()
+})
 //
 //
 // -- This is a child command --
